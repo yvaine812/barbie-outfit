@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>成都芭比时尚穿搭助手</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-lavender: #f4ecfd;
+            --main-purple: #9d72ff;
+            --dark-purple: #6c4ab6;
+            --soft-purple: #e9dcfc;
+            --barbie-pink: #ff75b5;
+            --card-white: #ffffff;
+            --text-dark: #3a2e4a;
+            --text-sub: #8a78a3;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-lavender);
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 16px;
+        }
+
+        /* 主容器：淡紫色调卡片 */
+        .app-window {
+            width: 100%;
+            max-width: 420px;
+            background: linear-gradient(180deg, #fbf7ff 0%, #f1e5fe 100%);
+            border-radius: 28px;
+            box-shadow: 0 16px 32px rgba(157, 114, 255, 0.18);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            border: 2px solid #ffffff;
+        }
+
+        /* 顶部标题栏 */
+        .app-header {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--dark-purple);
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* 主体双栏结构：左边(上下) + 右边(上下) */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 14px;
+        }
+
+        /* ================= 左侧布局 ================= */
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* 左上：中国成都实时天气 */
+        .weather-card {
+            background: linear-gradient(135deg, #b388ff 0%, #d8b4fe 100%);
+            border-radius: 20px;
+            padding: 14px;
+            color: #ffffff;
+            box-shadow: 0 8px 16px rgba(157, 114, 255, 0.2);
+            position: relative;
+        }
+
+        .location-tag {
+            font-size: 11px;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 3px 8px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+        }
+
+        .weather-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .temp-text {
+            font-size: 28px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .weather-status {
+            font-size: 11px;
+            opacity: 0.95;
+            margin-top: 2px;
+        }
+
+        .weather-icon {
+            font-size: 32px;
+            color: #ffe600;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+        }
+
+        /* 左下：推荐的衣服、配饰、包 */
+        .recommend-card-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .group-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--dark-purple);
+            margin-left: 2px;
+        }
+
+        .item-card {
+            background: var(--card-white);
+            border-radius: 14px;
+            padding: 8px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(157, 114, 255, 0.06);
+            border: 1px solid #f0e6ff;
+        }
+
+        .item-icon-box {
+            width: 34px;
+            height: 34px;
+            background: var(--soft-purple);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--main-purple);
+            font-size: 15px;
+            flex-shrink: 0;
+        }
+
+        .item-info {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .item-category {
+            font-size: 9px;
+            color: var(--text-sub);
+        }
+
+        .item-name {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-dark);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ================= 右侧布局 ================= */
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* 右上：女孩穿上衣服的样子 (芭比公主风格) */
+        .barbie-display-card {
+            background: var(--card-white);
+            border-radius: 20px;
+            padding: 12px;
+            box-shadow: 0 8px 20px rgba(157, 114, 255, 0.12);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid #f0e2ff;
+            flex: 1;
+        }
+
+        .barbie-stage {
+            width: 100%;
+            height: 220px;
+            background: radial-gradient(circle, #fff0f7 0%, #f3e5ff 100%);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border: 1.5px dashed #d8b4fe;
+        }
+
+        .look-tag {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: var(--barbie-pink);
+            color: white;
+            font-size: 9px;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 8px;
+        }
+
+        .barbie-avatar {
+            font-size: 85px;
+            color: var(--barbie-pink);
+            filter: drop-shadow(0 8px 12px rgba(255, 117, 181, 0.35));
+            animation: floatBarbie 3s ease-in-out infinite;
+        }
+
+        @keyframes floatBarbie {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .barbie-style-desc {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--dark-purple);
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* 右下：一键生成形象按键 */
+        .generate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff75b5 0%, #9d72ff 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 16px;
+            padding: 12px 0;
+            font-size: 12px;
+            font-weight: 800;
+            box-shadow: 0 6px 16px rgba(255, 117, 181, 0.4);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .generate-btn:active {
+            transform: scale(0.96);
+            box-shadow: 0 2px 8px rgba(255, 117, 181, 0.3);
+        }
+
+        .magic-sparkle {
+            animation: rotateSparkle 2s linear infinite;
+        }
+
+        @keyframes rotateSparkle {
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-window">
+        <!-- 头部 -->
+        <div class="app-header">
+            <i class="fa-solid fa-crown" style="color: #ff75b5;"></i>
+            <span>芭比Princess · 穿搭助手</span>
+        </div>
+
+        <!-- 主体结构 -->
+        <div class="main-grid">
+            
+            <!-- 左侧区域：上天气，下推荐 -->
+            <div class="left-column">
+                
+                <!-- 【左边上面】：显示中国成都实时天气 -->
+                <div class="weather-card">
+                    <div class="location-tag">
+                        <i class="fa-solid fa-location-dot"></i> 中国·成都
+                    </div>
+                    <div class="weather-main">
+                        <div>
+                            <div class="temp-text" id="temp">22°C</div>
+                            <div class="weather-status" id="weather-text">晴朗 / 微风</div>
+                        </div>
+                        <div class="weather-icon">
+                            <i class="fa-solid fa-sun" id="weather-icon"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 【左边下面】：推荐的衣服、配饰、包 -->
+                <div class="recommend-card-group">
+                    <div class="group-title">✨ 今日推荐搭配</div>
+                    
+                    <!-- 推荐衣服 -->
+                    <div class="item-card">
+                        <div class="item-icon-box"><i class="fa-solid fa-shirt"></i></div>
+                        <div class="item-info">
+                            <span class="item-category">推荐衣服</span>
+                            <span class="item-name" id="clothing-name">淡紫泡泡袖仙女裙</span>
+                        </div>
+                    </div>
+
+                    <!-- 推荐配饰 -->
+                    <div class="item-card">
+                        <div class="item-icon-box"><i class="fa-solid fa-gem"></i></div>
+                        <div class="item-info">
+                            <span class="item-category">推荐配饰</span>
+                            <span class="item-name" id="accessory-name">复古珍珠蝴蝶结项链</span>
+                        </div>
+                    </div>
+
+                    <!-- 推荐包包 -->
+                    <div class="item-card">
+                        <div class="item-icon-box"><i class="fa-solid fa-bag-shopping"></i></div>
+                        <div class="item-info">
+                            <span class="item-category">推荐包包</span>
+                            <span class="item-name" id="bag-name">芭比粉手提爱心包</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 右侧区域：上形象，下按键 -->
+            <div class="right-column">
+                
+                <!-- 【右边上面】：显示女孩穿上衣服的样子（芭比公主卡通形象） -->
+                <div class="barbie-display-card">
+                    <div class="barbie-stage">
+                        <span class="look-tag" id="look-tag">STYLE #1</span>
+                        <div class="barbie-avatar" id="barbie-avatar">
+                            <i class="fa-solid fa-person-dress"></i>
+                        </div>
+                    </div>
+                    <div class="barbie-style-desc" id="style-desc">甜美梦幻 Princess 风格</div>
+                </div>
+
+                <!-- 【右边下面】：点击后一键生成形象按键 -->
+                <button class="generate-btn" onclick="generateBarbieLook()">
+                    <i class="fa-solid fa-wand-magic-sparkles magic-sparkle"></i> 一键生成形象
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // 芭比公主风卡通形象与穿搭数据组合
+        const barbieLooks = [
+            {
+                tag: "STYLE #1",
+                clothing: "淡紫泡泡袖仙女裙",
+                accessory: "复古珍珠蝴蝶结项链",
+                bag: "芭比粉手提爱心包",
+                avatarIcon: "fa-solid fa-person-dress",
+                avatarColor: "#ff75b5",
+                desc: "甜美梦幻 Princess 风格"
+            },
+            {
+                tag: "STYLE #2",
+                clothing: "芭比粉吊带挂脖裙",
+                accessory: "闪耀水晶星芒耳环",
+                bag: "银色链条腋下包",
+                avatarIcon: "fa-solid fa-person-dress-burst",
+                avatarColor: "#9d72ff",
+                desc: "法式浪漫芭比风格"
+            },
+            {
+                tag: "STYLE #3",
+                clothing: "淡紫小香风套装裙",
+                accessory: "山茶花发夹 & 珍珠手链",
+                bag: "白色菱格复古手包",
+                avatarIcon: "fa-solid fa-user-ninja",
+                avatarColor: "#ff4d94",
+                desc: "精致优雅名媛风格"
+            }
+        ];
+
+        let currentIndex = 0;
+
+        // 点击一键生成形象逻辑
+        function generateBarbieLook() {
+            currentIndex = (currentIndex + 1) % barbieLooks.length;
+            const current = barbieLooks[currentIndex];
+
+            // 按钮点击防抖动画
+            const btn = document.querySelector('.generate-btn');
+            btn.style.transform = 'scale(0.93)';
+            setTimeout(() => btn.style.transform = 'scale(1)', 150);
+
+            // 动态更新左下角：衣服、配饰、包
+            document.getElementById('clothing-name').innerText = current.clothing;
+            document.getElementById('accessory-name').innerText = current.accessory;
+            document.getElementById('bag-name').innerText = current.bag;
+
+            // 动态更新右侧：芭比公主形象与风格
+            document.getElementById('look-tag').innerText = current.tag;
+            document.getElementById('style-desc').innerText = current.desc;
+            
+            const avatar = document.getElementById('barbie-avatar');
+            avatar.style.color = current.avatarColor;
+            avatar.innerHTML = `<i class="${current.avatarIcon}"></i>`;
+        }
+    </script>
+</body>
+</html>
